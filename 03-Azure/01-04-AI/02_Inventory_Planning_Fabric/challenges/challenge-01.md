@@ -41,7 +41,6 @@ The data lives in **Microsoft Fabric** (a governed Lakehouse with inventory, dem
    Navigate to [ai.azure.com](https://ai.azure.com) and open **your** Foundry project — its `FoundryProjectEndpoint` is on your lab dashboard.
    - Locate the **model deployments** — confirm `gpt-5.4-mini` is deployed.
    - Open **Agents → Playground** and send a test message: *"What can you do?"*
-   - Open **Tracing** in the left navigation — this is where you will inspect agent decisions in Challenges 3 and 4.
 
    ![Models and endpoints view in the Foundry portal showing gpt-5.4-mini deployed with status Succeeded](../images/challenge-00-model-deployments.png)
 
@@ -59,7 +58,7 @@ The data lives in **Microsoft Fabric** (a governed Lakehouse with inventory, dem
 
    ![Fabric left navigation with Workspaces open and the New workspace button highlighted](../images/challenge-00-new-workspace-button.png)
 
-   Name it `inventory-hack`, expand **Advanced**, and under **Workspace type** select **Fabric**. A **Details** dropdown appears — select your **`FabricCapacityName`** (the `invcap…` value from your dashboard). Click **Apply**.
+   Name it `inventory-hack-<uniquesuffix>` replacing <unique-suffix> with your a random number to make the workspace name globally unique (for example, inventory-hack-82901), expand **Advanced**, and under **Workspace type** select **Fabric**. A **Details** dropdown appears — select your **`FabricCapacityName`** (the `invcap…` value from your dashboard). Click **Apply**.
 
    ![Create a workspace dialog with Workspace type set to Fabric and the attendee's F2 capacity selected under Details](../images/challenge-00-create-workspace.png)
 
@@ -92,6 +91,15 @@ The data lives in **Microsoft Fabric** (a governed Lakehouse with inventory, dem
    Keep the schema as **`dbo`**, set the table name to the file name without the `.parquet` extension, and click **Load**. For example, load `demandhistory.parquet` into a table named `demandhistory`. Repeat this for all seven files.
 
    ![The Load file to new table dialog using the dbo schema and demandhistory table name](../images/challenge-00-lakehouse-load-table.png)
+
+   > [!NOTE]
+   > If there is an issue that shows "Load table failed" open details and check the reason. If there is a message of TooManyRequestsForCapacity, wait some minutes and try again. If the error persist follow these steps:
+   > 1) Go to Workspace settings.
+   > 2) Select Data Engineering/Science > Spark settings.
+   > 3) Select Jobs to open the live dashboard with active and queued Spark jobs, CU consumption, and concurrency thresholds.
+   > 4) Select View job submission details to inspect specific job events and logs.
+   > 5) click the ... in the running job and click stop
+
 
    **c. Verify the tables.**
    Expand **Tables -> dbo** and confirm that these seven tables appear: `demandhistory`, `externalsignals`, `inventory`, `products`, `replenishmentorders`, `stores`, and `suppliers`.
