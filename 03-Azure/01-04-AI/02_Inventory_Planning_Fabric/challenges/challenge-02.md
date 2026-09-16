@@ -100,6 +100,14 @@ This is the first agent where you attach the Fabric Data Agent, so you'll **crea
 4. Ask a follow-up question: *"Which store or warehouse has the lowest stock of outdoor power tools relative to its reorder point?"*
 5. Ask: *"What external signals in the last 30 days could affect demand for outdoor power tools in the Pacific Northwest?"*
 
+> [!NOTE]
+> If an error like "Error your requests to gpt-5.4-mini in <region> has exceeded the rate limit", either wait one minute and try again, or follow these steps to increase the throughput:
+> 1) Go to Models in the left menu
+> 2) select the radio button at the left of **gpt-5.4-mini**
+> 3) Click Edit in the button on the right form.
+> 4) Us the slider or the text box in "Tokens per Minute Rate Limit" and set a higher value (e.g. 400000)
+> 5) Click **Save** button
+
 ## 🏁 Success criteria
 
 - [ ] The `demand-sensing-agent` prompt agent exists in your Foundry project with the Fabric Data Agent tool attached (and Web Search too, if it is enabled).
